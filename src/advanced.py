@@ -49,8 +49,8 @@ def callback(contents: str, user: str, instance: pn.chat.ChatInterface):
 #-----------------------------------------------------------
 #handler function
 avators = {"Interviewer":"https://cdn-icons-png.flaticon.com/512/320/320336.png",
-            "Medical_Exp":"https://cdn-icons-png.freepik.com/512/6283/6283228.png",
-            "General_Doctor": "https://cdn-icons-png.flaticon.com/512/387/387561.png"}
+            "Medical Exp":"https://cdn-icons-png.freepik.com/512/6283/6283228.png",
+            "General Doctor": "https://cdn-icons-png.flaticon.com/512/387/387561.png"}
 
 class MyCustomHandler(BaseCallbackHandler):
 
