@@ -35,7 +35,7 @@ def callback_function1(output):
     agent_action = output[0][0]
     tool_input_dict = json.loads(agent_action.tool_input)
     question = tool_input_dict.get("question")
-    chat_interface.send(question, user="Compounder", respond=False)
+    chat_interface.send(question, user="Interviewer", respond=False)
 
 
 def initiate_chat():
@@ -48,7 +48,7 @@ def callback(contents: str, user: str, instance: pn.chat.ChatInterface):
 
 #-----------------------------------------------------------
 #handler function
-avators = {"Compounder":"https://cdn-icons-png.flaticon.com/512/320/320336.png",
+avators = {"Interviewer":"https://cdn-icons-png.flaticon.com/512/320/320336.png",
             "Medical_Exp":"https://cdn-icons-png.freepik.com/512/6283/6283228.png",
             "General_Doctor": "https://cdn-icons-png.flaticon.com/512/387/387561.png"}
 
