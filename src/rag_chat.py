@@ -36,7 +36,7 @@ def initialize_chain(pdf, k, chain):
     retriever = db.as_retriever(search_type="similarity", search_kwargs={"k": k})
     # create a chain to answer questions
     qa = RetrievalQA.from_chain_type(
-        llm=ChatOpenAI(),
+        llm=ChatOpenAI(model="gpt-4-0125-preview", api_key=os.getenv("OPENAI_API_KEY")),
         chain_type=chain,
         retriever=retriever,
         return_source_documents=True,
@@ -49,7 +49,7 @@ def respond(contents, user, chat_interface):
     chat_input.placeholder = "Ask questions here!"
     if chat_interface.active == 0:
         chat_interface.active = 1
-        yield {"user": "OpenAI", "value": "What do you want to ask"}
+        yield {"user": "MediBot Report Assisstat", "value": "What do you want to ask"}
 
         contents.seek(0)
         pn.state.cache["pdf"] = contents.read()
@@ -66,7 +66,7 @@ def respond(contents, user, chat_interface):
     for doc in response["source_documents"][::-1]:
         answers.append((f"Snippet from page {doc.metadata['page']}", doc.page_content))
     answers.active = [0, 1]
-    yield {"user": "OpenAI", "value": answers}
+    yield {"user": "MediBot Report Assisstant", "value": answers}
 
 
 # sidebar widgets
@@ -85,9 +85,9 @@ sidebar = pn.Column(key_input, k_slider, chain_select)
 
 # main widgets
 pdf_input = pn.widgets.FileInput(accept=".pdf", value="", height=50)
-chat_input = pn.chat.ChatAreaInput(placeholder="First, upload a PDF!")
+chat_input = pn.chat.ChatAreaInput(placeholder="First, upload your report!")
 chat_interface = pn.chat.ChatInterface(
-    help_text="Please first upload a PDF and click send!",
+    help_text="Please first upload your report and click send!",
     callback=respond,
     sizing_mode="stretch_width",
     widgets=[pdf_input, chat_input],

@@ -22,7 +22,7 @@ async def callback(contents: str, user: str, instance: pn.chat.ChatInterface):
     messages = instance.serialize()
 
     response = await aclient.chat.completions.create(
-        model="gpt-3.5-turbo",
+        model="gpt-4-0125-preview",
         messages=messages,
         stream=True,
     )
@@ -39,11 +39,11 @@ aclient = AsyncOpenAI(api_key = os.getenv('OPENAI_API_KEY'))
 
 chat_interface = pn.chat.ChatInterface(
     callback=callback,
-    callback_user="GPT-3.5",
-    help_text="Send a message to get a reply from GPT-3.5 Turbo!",
+    callback_user="MediBot Basic",
+    help_text="Ask a query to get help from MediBot Basic",
 )
 template = pn.template.FastListTemplate(
-    title="OpenAI GPT-3.5",
+    title="MediBot Basic",
     header_background="#212121",
     main=[chat_interface],
 )
