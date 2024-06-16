@@ -35,7 +35,7 @@ def callback_function1(output):
     agent_action = output[0][0]
     tool_input_dict = json.loads(agent_action.tool_input)
     question = tool_input_dict.get("question")
-    chat_interface.send(question, user="Compounder", respond=False)
+    chat_interface.send(question, user="Clinical Assistant", respond=False)
 
 
 def initiate_chat():
@@ -49,7 +49,7 @@ def callback(contents: str, user: str, instance: pn.chat.ChatInterface):
 
 #-----------------------------------------------------------
 #handler function
-avators = {"Compounder":"https://cdn-icons-png.flaticon.com/512/320/320336.png",
+avators = {"Clinical Assistant":"https://cdn-icons-png.flaticon.com/512/320/320336.png",
             "Medical_Exp":"https://cdn-icons-png.freepik.com/512/9408/9408201.png",
             "General_Doctor": "https://cdn-icons-png.freepik.com/512/9408/9408201.png"}
 
@@ -67,7 +67,7 @@ class MyCustomHandler(BaseCallbackHandler):
         """Print out that we finished a chain."""
     
         chat_interface.send(outputs['output'], user=self.agent_name, avatar=avators[self.agent_name], respond=False)
-        if self.agent_name == "Compounder":
+        if self.agent_name == "Clinical Assistant":
             chat_interface.send("Medical Diagnostician will join soon with your diagnostic report. Please wait!",user = "System", respond=False)
         elif self.agent_name == "Medical_Exp":
             chat_interface.send("General Doctor will join soon!.",user = "System", respond=False)
@@ -103,9 +103,9 @@ class HealthCrew():
     @agent
     def medical_interviewer(self) -> Agent:
         return Agent(
-            config = self.agents_config['Compounder'],
+            config = self.agents_config['Clinical_Assistant'],
             llm = self.openai_llm,
-            callbacks = [MyCustomHandler("Compounder")],
+            callbacks = [MyCustomHandler("Clinical Assistant")],
             tools = self.human
         )
 
@@ -132,7 +132,7 @@ class HealthCrew():
             config = self.tasks_config['med_hist'],
             agent = self.medical_interviewer(),
             tools =self.human,
-            # callbacks = [MyCustomHandler("Compounder")],
+            # callbacks = [MyCustomHandler("Clinical Assistant")],
             human_input = False
             
         )

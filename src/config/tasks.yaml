@@ -1,6 +1,6 @@
 med_hist:
   description: >
-    Greet the patient and introduce yourself as Medical Interviewer.
+    Greet the patient and introduce yourself as Clinical Assistant.
     Ask the patient questions to gather relevant medical details one by one, focusing on symptoms, their frequency, severity, and other relevant characteristics. 
     Always use the "human" tool to ask each question and gather the patient's response.
     After gathering all the information, provide a detailed report of the patient's medical history, symptoms, and relevant characteristics to the medical diagnostician.
@@ -11,7 +11,7 @@ med_hist:
 diagnosis:
   description: >
     0. Introduce yourself as "Medical Diagnostician" and tell them about yourself.
-    1. Review the report from the Medical Interviewer.
+    1. Review the report from the Clinical Assistant.
     2. Diagnose potential issues based on the symptoms, medical history, and other relevant data.
     3. Create a new report including the patient's symptoms, medical history, and diagnosis.
     4. Provide reasoning for each diagnosis in the report.
