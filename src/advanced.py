@@ -67,9 +67,9 @@ class MyCustomHandler(BaseCallbackHandler):
     
         chat_interface.send(outputs['output'], user=self.agent_name, avatar=avators[self.agent_name], respond=False)
         if self.agent_name == "Interviewer":
-            chat_interface.send("Medical Diagnostician will join soon with your diagnostic report.")
+            chat_interface.send("Medical Diagnostician will join soon with your diagnostic report")
         elif self.agent_name == "Medical Expert":
-            chat_interface.send("General Doctor will join soon.")
+            chat_interface.send("General Doctor will join soon")
 
     def on_agent_action(self, agent_action, **kwargs: Any) -> Any:
         """Run on agent action."""
@@ -165,10 +165,12 @@ class HealthCrew():
             process = Process.sequential,
             verbose = 0
         )
-    
+
+#-----------------------------------------------------------
 
 def StartCrew():
     result = HealthCrew().crew().kickoff()
+    chat_interface.disabled = True
     
 
 # ----------------------------------------------------------------
