@@ -35,22 +35,23 @@ def callback_function1(output):
     agent_action = output[0][0]
     tool_input_dict = json.loads(agent_action.tool_input)
     question = tool_input_dict.get("question")
-    chat_interface.send(question, user="Interviewer", respond=False)
+    chat_interface.send(question, user="Compounder", respond=False)
 
 
 def initiate_chat():
     StartCrew()
 
 def callback(contents: str, user: str, instance: pn.chat.ChatInterface):
+    
     global user_input
     user_input = contents
         
 
 #-----------------------------------------------------------
 #handler function
-avators = {"Interviewer":"https://cdn-icons-png.flaticon.com/512/320/320336.png",
-            "Medical Exp":"https://cdn-icons-png.freepik.com/512/6283/6283228.png",
-            "General Doctor": "https://cdn-icons-png.flaticon.com/512/387/387561.png"}
+avators = {"Compounder":"https://cdn-icons-png.flaticon.com/512/320/320336.png",
+            "Medical_Exp":"https://cdn-icons-png.freepik.com/512/9408/9408201.png",
+            "General_Doctor": "https://cdn-icons-png.freepik.com/512/9408/9408201.png"}
 
 class MyCustomHandler(BaseCallbackHandler):
 
@@ -66,10 +67,10 @@ class MyCustomHandler(BaseCallbackHandler):
         """Print out that we finished a chain."""
     
         chat_interface.send(outputs['output'], user=self.agent_name, avatar=avators[self.agent_name], respond=False)
-        if self.agent_name == "Interviewer":
-            chat_interface.send("Medical Diagnostician will join soon with your diagnostic report")
-        elif self.agent_name == "Medical Expert":
-            chat_interface.send("General Doctor will join soon")
+        if self.agent_name == "Compounder":
+            chat_interface.send("Medical Diagnostician will join soon with your diagnostic report. Please wait!",user = "System", respond=False)
+        elif self.agent_name == "Medical_Exp":
+            chat_interface.send("General Doctor will join soon!.",user = "System", respond=False)
 
     def on_agent_action(self, agent_action, **kwargs: Any) -> Any:
         """Run on agent action."""
@@ -104,7 +105,7 @@ class HealthCrew():
         return Agent(
             config = self.agents_config['Compounder'],
             llm = self.openai_llm,
-            callbacks = [MyCustomHandler("Interviewer")],
+            callbacks = [MyCustomHandler("Compounder")],
             tools = self.human
         )
 
@@ -113,7 +114,7 @@ class HealthCrew():
         return Agent(
             config = self.agents_config['Medical_Exp'],
             llm = self.openai_llm,
-            callbacks = [MyCustomHandler("Medical Expert")],
+            callbacks = [MyCustomHandler("Medical_Exp")],
         )
 
     @agent
@@ -121,7 +122,7 @@ class HealthCrew():
         return Agent(
             config = self.agents_config['General_Doctor'],
             llm = self.openai_llm,
-            callbacks = [MyCustomHandler("General Doctor")],
+            callbacks = [MyCustomHandler("General_Doctor")],
             tools = self.human
         ) 
 
@@ -165,8 +166,7 @@ class HealthCrew():
             process = Process.sequential,
             verbose = 0
         )
-
-#-----------------------------------------------------------
+    
 
 def StartCrew():
     result = HealthCrew().crew().kickoff()

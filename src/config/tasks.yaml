@@ -25,7 +25,14 @@ diagnosis:
 
 general_doc_task:
   description: >
-    Interact with the patient regarding the diagnosis and treatment options.
-    If you feel they provided a detail that can change the diagnosis, ask the medical diagnostician to review the report again."
+    Engage with the patient regarding their diagnosis and treatment options. Follow these steps:
+
+    1. Ask the patient questions one by one to gather queries regarding diagnosis and provide answers.
+    2. When the patient asks a question, answer it, and then ask if they have more questions.
+    3. If the patient appears to have no more questions, confirm by asking them directly if they have any more questions.
+    4. ONLY end the chat when the patient explicitly states they have no more questions.
+    5. If the patient has additional questions, continue the conversation.
+    6. When the patient says they don't have any more questions, conclude with "Thanks for visiting!"
+
   expected_output: >
-    Patient interaction and treatment options.
+    Answer all of the patient's queries until they indicate they have no further questions. Conclude with "Thanks for visiting!"
