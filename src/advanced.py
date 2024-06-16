@@ -42,7 +42,6 @@ def initiate_chat():
     StartCrew()
 
 def callback(contents: str, user: str, instance: pn.chat.ChatInterface):
-    
     global user_input
     user_input = contents
         
@@ -67,9 +66,9 @@ class MyCustomHandler(BaseCallbackHandler):
         """Print out that we finished a chain."""
     
         chat_interface.send(outputs['output'], user=self.agent_name, avatar=avators[self.agent_name], respond=False)
-        if self.agent_name == "Compounder":
+        if self.agent_name == "Interviewer":
             chat_interface.send("Medical Diagnostician will join soon with your diagnostic report.")
-        elif self.agent_name == "Medical_Exp":
+        elif self.agent_name == "Medical Expert":
             chat_interface.send("General Doctor will join soon.")
 
     def on_agent_action(self, agent_action, **kwargs: Any) -> Any:
@@ -105,7 +104,7 @@ class HealthCrew():
         return Agent(
             config = self.agents_config['Compounder'],
             llm = self.openai_llm,
-            callbacks = [MyCustomHandler("Compounder")],
+            callbacks = [MyCustomHandler("Interviewer")],
             tools = self.human
         )
 
@@ -114,7 +113,7 @@ class HealthCrew():
         return Agent(
             config = self.agents_config['Medical_Exp'],
             llm = self.openai_llm,
-            callbacks = [MyCustomHandler("Medical_Exp")],
+            callbacks = [MyCustomHandler("Medical Expert")],
         )
 
     @agent
@@ -122,7 +121,7 @@ class HealthCrew():
         return Agent(
             config = self.agents_config['General_Doctor'],
             llm = self.openai_llm,
-            callbacks = [MyCustomHandler("General_Doctor")],
+            callbacks = [MyCustomHandler("General Doctor")],
             tools = self.human
         ) 
 
