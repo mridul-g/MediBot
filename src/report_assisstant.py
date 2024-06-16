@@ -1,6 +1,5 @@
 import os
 import tempfile
-
 import panel as pn
 from langchain.chains import RetrievalQA
 from langchain.document_loaders import PyPDFLoader

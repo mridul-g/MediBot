@@ -1,12 +1,3 @@
-"""
-Demonstrates how to use OpenAI's GPT-3.5 API with Panel's ChatInterface.
-
-Highlights:
-
-- Uses `PasswordInput` to set the API key, or uses the `OPENAI_API_KEY` environment variable.
-- Uses `serialize` to get chat history from the `ChatInterface`.
-- Uses `yield` to continuously concatenate the parts of the response
-"""
 import panel as pn
 from openai import AsyncOpenAI
 import os

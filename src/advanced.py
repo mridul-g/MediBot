@@ -1,13 +1,10 @@
-from uuid import UUID
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
-from langchain_groq import ChatGroq
 from langchain.agents import load_tools
 from langchain.chat_models import ChatOpenAI
 from dotenv import load_dotenv
 from langchain_core.callbacks import BaseCallbackHandler
-from typing import TYPE_CHECKING, Any, Dict, List, Optional
-import _osx_support
+from typing import Any, Dict
 import panel as pn
 import time, threading, os, json
 import os
