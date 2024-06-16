@@ -17,9 +17,6 @@ pn.extension()
 
 
 async def callback(contents: str, user: str, instance: pn.chat.ChatInterface):
-    if api_key_input.value:
-        # use api_key_input.value if set, otherwise use OPENAI_API_KEY
-        aclient.api_key = api_key_input.value
 
     # memory is a list of messages
     messages = instance.serialize()
@@ -39,11 +36,7 @@ async def callback(contents: str, user: str, instance: pn.chat.ChatInterface):
 
 
 aclient = AsyncOpenAI(api_key = os.getenv('OPENAI_API_KEY'))
-api_key_input = pn.widgets.PasswordInput(
-    placeholder="sk-... uses $OPENAI_API_KEY if not set",
-    sizing_mode="stretch_width",
-    styles={"color": "black"},
-)
+
 chat_interface = pn.chat.ChatInterface(
     callback=callback,
     callback_user="GPT-3.5",
@@ -53,6 +46,5 @@ template = pn.template.FastListTemplate(
     title="OpenAI GPT-3.5",
     header_background="#212121",
     main=[chat_interface],
-    header=[api_key_input],
 )
 template.servable()

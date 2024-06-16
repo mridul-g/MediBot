@@ -1,52 +1,31 @@
 from uuid import UUID
 from crewai import Agent, Crew, Process, Task
 from crewai.project import CrewBase, agent, crew, task
-from langchain_core.messages import BaseMessage
 from langchain_groq import ChatGroq
 from langchain.agents import load_tools
-
 from langchain.chat_models import ChatOpenAI
 from dotenv import load_dotenv
 from langchain_core.callbacks import BaseCallbackHandler
-#import PanelCallbackHandler
-from panel.chat.langchain import PanelCallbackHandler
 from typing import TYPE_CHECKING, Any, Dict, List, Optional
 import _osx_support
 import panel as pn
-import os
-import json
-load_dotenv()
-
+import time, threading, os, json
 
 pn.extension(design="material")
+
 #--------------------------------
 #human interface
-from crewai.agents import CrewAgentExecutor
-import time 
 
 def custom_ask_human_input() -> str:
-      
       global user_input
-
-    #   prompt = self._i18n.slice("getting_input").format(final_answer=final_answer)
-
-    #   chat_interface.send(prompt, user="assistant", respond=False)
-
       while user_input == None:
           time.sleep(1)
-
       human_comments = user_input
       user_input = None
-
       return human_comments
-
-# CrewAgentExecutor._ask_human_input = custom_ask_human_input
-
 
 #--------------------------------------------------
 #call back function
-import threading
-import time
 
 user_input = None
 initiate_chat_task_created = False
@@ -90,32 +69,19 @@ class MyCustomHandler(BaseCallbackHandler):
 
     def on_agent_action(self, agent_action, **kwargs: Any) -> Any:
         """Run on agent action."""
-        print(f"Agent action: {agent_action}")
         tool_input_dict = json.loads(agent_action.tool_input)
         question = None
         if 'query' in tool_input_dict:
             question = tool_input_dict.get('query')
-        else:
+        elif 'custom_ask_human_input' in tool_input_dict:
             question = tool_input_dict.get("custom_ask_human_input")
-
+        elif 'question' in tool_input_dict:
+            question = tool_input_dict.get("question")
 
         chat_interface.send(question, user=self.agent_name, avatar=avators[self.agent_name], respond=False)
 
-    
-        
-    # def on_chain_start(
-    #     self, serialized: Dict[str, Any], inputs: Dict[str, Any], **kwargs: Any
-    # ) -> None:
-    #     """Print out that we are entering a chain."""
 
-    #     chat_interface.send(inputs['input'], user="assistant", respond=False)
-
-    # def on_chain_end(self, outputs: Dict[str, Any], **kwargs: Any) -> None:
-    #     """Print out that we finished a chain."""
-    
-    #     chat_interface.send(outputs['output'], user=self.agent_name, avatar=avators[self.agent_name], respond=False)
-
-#-------------------------------
+#-----------------------------------------------------------
 #crew class contains agents and tasks
 @CrewBase
 class HealthCrew():
@@ -196,12 +162,12 @@ class HealthCrew():
             verbose = 0
         )
     
+
 def StartCrew():
     result = HealthCrew().crew().kickoff()
     # chat_interface.send("## Final Result\n"+result, user="assistant", respond=False)
 
-
-# -----------------------------------------------------------
+# ----------------------------------------------------------------
 # panel init
 chat_interface = pn.chat.ChatInterface(callback=callback)
 # chat_interface.send("Send a message!", user="System", respond=False)

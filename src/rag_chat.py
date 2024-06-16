@@ -1,9 +1,3 @@
-"""
-Demonstrates how to use the `ChatInterface` to chat about a PDF using
-OpenAI, [LangChain](https://python.langchain.com/docs/get_started/introduction) and
-[Chroma](https://docs.trychroma.com/).
-"""
-
 import os
 import tempfile
 
@@ -102,5 +96,5 @@ chat_interface = pn.chat.ChatInterface(
 chat_interface.active = 0
 
 # layout
-template = pn.template.BootstrapTemplate(sidebar=[sidebar], main=[chat_interface])
+template = pn.template.BootstrapTemplate(main=[chat_interface])
 template.servable()
