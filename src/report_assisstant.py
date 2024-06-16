@@ -96,5 +96,9 @@ chat_interface = pn.chat.ChatInterface(
 chat_interface.active = 0
 
 # layout
-template = pn.template.BootstrapTemplate(main=[chat_interface])
+template = pn.template.FastListTemplate(
+    title='Report Assisstant',
+    main=[chat_interface],
+    site="MediBot",
+    site_url="/report",)
 template.servable()

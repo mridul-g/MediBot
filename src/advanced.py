@@ -11,8 +11,6 @@ import _osx_support
 import panel as pn
 import time, threading, os, json
 
-pn.extension(design="material")
-
 #--------------------------------
 #human interface
 
@@ -170,10 +168,14 @@ def StartCrew():
 # ----------------------------------------------------------------
 # panel init
 chat_interface = pn.chat.ChatInterface(callback=callback)
-# chat_interface.send("Send a message!", user="System", respond=False)
+template = pn.template.FastListTemplate(
+    title="Advanced",
+    main=[chat_interface],
+    site="MediBot",
+    site_url="/advanced")
 thread = threading.Thread(target=initiate_chat)
 thread.start()
-chat_interface.servable()
+template.servable()
 
 
 

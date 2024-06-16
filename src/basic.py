@@ -43,8 +43,10 @@ chat_interface = pn.chat.ChatInterface(
     help_text="Ask a query to get help from MediBot Basic",
 )
 template = pn.template.FastListTemplate(
-    title="MediBot Basic",
+    title="Basic",
     header_background="#212121",
     main=[chat_interface],
+    site="MediBot",
+    site_url="/basic",
 )
 template.servable()
