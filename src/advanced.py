@@ -10,6 +10,9 @@ from typing import TYPE_CHECKING, Any, Dict, List, Optional
 import _osx_support
 import panel as pn
 import time, threading, os, json
+import os
+
+load_dotenv()
 
 #--------------------------------
 #human interface
@@ -64,6 +67,10 @@ class MyCustomHandler(BaseCallbackHandler):
         """Print out that we finished a chain."""
     
         chat_interface.send(outputs['output'], user=self.agent_name, avatar=avators[self.agent_name], respond=False)
+        if self.agent_name == "Compounder":
+            chat_interface.send("Medical Diagnostician will join soon with your diagnostic report.")
+        elif self.agent_name == "Medical_Exp":
+            chat_interface.send("General Doctor will join soon.")
 
     def on_agent_action(self, agent_action, **kwargs: Any) -> Any:
         """Run on agent action."""
@@ -146,8 +153,8 @@ class HealthCrew():
             agent = self.doctor(),
             #context = [collect_symptoms, preliminary_diagnosis],
             # callback=callback_function,
-            tool = self.human,
-            human_input = True
+            tools = self.human,
+            human_input = False
         )
 
     @crew
@@ -163,7 +170,7 @@ class HealthCrew():
 
 def StartCrew():
     result = HealthCrew().crew().kickoff()
-    # chat_interface.send("## Final Result\n"+result, user="assistant", respond=False)
+    
 
 # ----------------------------------------------------------------
 # panel init
