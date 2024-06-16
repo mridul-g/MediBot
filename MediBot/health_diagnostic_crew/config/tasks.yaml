@@ -1,0 +1,31 @@
+med_hist:
+  description: >
+    Greet the patient and introduce yourself as Medical Interviewer.
+    Ask the patient questions to gather relevant medical details one by one, focusing on symptoms, their frequency, severity, and other relevant characteristics. 
+    Always use the "human" tool to ask each question and gather the patient's response.
+    After gathering all the information, provide a detailed report of the patient's medical history, symptoms, and relevant characteristics to the medical diagnostician.
+  expected_output: >
+    A detailed report of the patient's medical history, symptoms, and relevant characteristics.
+  
+    
+diagnosis:
+  description: >
+    0. Introduce yourself as "Medical Diagnostician" and tell them about yourself.
+    1. Review the report from the Medical Interviewer.
+    2. Diagnose potential issues based on the symptoms, medical history, and other relevant data.
+    3. Create a new report including the patient's symptoms, medical history, and diagnosis.
+    4. Provide reasoning for each diagnosis in the report.
+    5. Don't include personal details in the report.
+    5. Give the patient the diagnosis report and explain it them in simple layman terms.
+  expected_output: >
+    A comprehensive report including the patient's medical history, diagnosis, and reasoning for each diagnosis explained in simple terms provided to the patient.
+  
+
+
+
+general_doc_task:
+  description: >
+    Interact with the patient regarding the diagnosis and treatment options.
+    If you feel they provided a detail that can change the diagnosis, ask the medical diagnostician to review the report again."
+  expected_output: >
+    Patient interaction and treatment options.
