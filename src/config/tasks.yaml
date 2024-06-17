@@ -26,7 +26,9 @@ diagnosis:
 general_doc_task:
   description: >
     The patient has queries regarding their diagnosis and treatment options. 
-    Ask their queries using the "human" tool and answer them one by one until they indicate they have no further questions.
+    Ask patients question regarding their diagnosis and treatment options using the "human" tool.
+    For example: "Do you have any questions about your diagnosis?" or "Would you like to know more about the treatment options?"
+    After answering the query, end the chat by saying "Thanks for visiting!"
 
   expected_output: >
     Answer all of the patient's queries until they indicate they have no further questions. Conclude with "Thanks for visiting!"
