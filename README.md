@@ -5,6 +5,7 @@ MediBot is a suite of advanced medical chatbots designed to assist with various 
 ## Table of Contents
 
 - [Introduction](#introduction)
+- [Demo Video](#demo-video)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Features](#features)
@@ -19,6 +20,10 @@ MediBot is designed to offer medical assistance through interactive chat interfa
 - **Basic**: A simple chat interface for basic medical queries.
 - **Report Assistant**: Assists with report analysis and answers questions based on provided documents.
 - **Advanced**: A comprehensive medical diagnostic system with multiple agents and tasks.
+
+## Demo-Video
+[![Demo Video](http://img.youtube.com/vi/Fs0JUmZyLZw/0.jpg)](https://www.youtube.com/watch?v=Fs0JUmZyLZw "Demo Video")
+
 
 ## Installation
 
