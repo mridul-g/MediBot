@@ -86,7 +86,7 @@ sidebar = pn.Column(key_input, k_slider, chain_select)
 pdf_input = pn.widgets.FileInput(accept=".pdf", value="", height=50)
 chat_input = pn.chat.ChatAreaInput(placeholder="First, upload your report!")
 chat_interface = pn.chat.ChatInterface(
-    help_text="Please first upload your report and click send!",
+    help_text="Please upload your report you need help with",
     callback=respond,
     sizing_mode="stretch_width",
     widgets=[pdf_input, chat_input],
@@ -99,5 +99,5 @@ template = pn.template.FastListTemplate(
     title='Report Assisstant',
     main=[chat_interface],
     site="MediBot",
-    site_url="/report",)
+    site_url="/report_assisstant",)
 template.servable()
