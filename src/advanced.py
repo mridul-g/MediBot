@@ -47,8 +47,8 @@ def callback(contents: str, user: str, instance: pn.chat.ChatInterface):
 #-----------------------------------------------------------
 #handler function
 avators = {"Clinical Assistant":"https://cdn-icons-png.flaticon.com/512/320/320336.png",
-            "Medical_Exp":"https://cdn-icons-png.freepik.com/512/9408/9408201.png",
-            "General_Doctor": "https://cdn-icons-png.freepik.com/512/9408/9408201.png"}
+            "Medical Exp":"https://cdn-icons-png.freepik.com/512/9408/9408201.png",
+            "General Doctor": "https://cdn-icons-png.freepik.com/512/9408/9408201.png"}
 
 class MyCustomHandler(BaseCallbackHandler):
 
@@ -66,7 +66,7 @@ class MyCustomHandler(BaseCallbackHandler):
         chat_interface.send(outputs['output'], user=self.agent_name, avatar=avators[self.agent_name], respond=False)
         if self.agent_name == "Clinical Assistant":
             chat_interface.send("Medical Diagnostician will join soon with your diagnostic report. Please wait!",user = "System", respond=False)
-        elif self.agent_name == "Medical_Exp":
+        elif self.agent_name == "Medical Exp":
             chat_interface.send("General Doctor will join soon!.",user = "System", respond=False)
 
     def on_agent_action(self, agent_action, **kwargs: Any) -> Any:
@@ -111,7 +111,7 @@ class HealthCrew():
         return Agent(
             config = self.agents_config['Medical_Exp'],
             llm = self.openai_llm,
-            callbacks = [MyCustomHandler("Medical_Exp")],
+            callbacks = [MyCustomHandler("Medical Exp")],
         )
 
     @agent
@@ -119,7 +119,7 @@ class HealthCrew():
         return Agent(
             config = self.agents_config['General_Doctor'],
             llm = self.openai_llm,
-            callbacks = [MyCustomHandler("General_Doctor")],
+            callbacks = [MyCustomHandler("General Doctor")],
             tools = self.human
         ) 
 
